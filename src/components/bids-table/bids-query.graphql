@@ -1,0 +1,9 @@
+query bids {
+    bids {
+        id
+        price
+        isActive
+        expiryTime
+        creationTime
+    }
+}

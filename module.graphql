@@ -1,0 +1,11 @@
+type Bid {
+  id: ID!
+  price: String!
+  isActive: Boolean!
+  expiryTime: String!
+  creationTime: String!
+}
+
+type Query {
+  bids: [Bid!]!
+}

@@ -1,25 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { RestLink } from "apollo-link-rest";
+import { calculateTimeDifference, hasExpired } from "./helpers";
+import { BidsTableContainer } from "./components/bids-table/bids-table-container";
+
+const restLink = new RestLink({
+  uri: "https://nft-fe-hiring.vercel.app/api/",
+  responseTransformer: async (response) => {
+    return response.json().then((data: any) =>
+      data.bids.map(
+        (bid: {
+          expiration: number;
+          createdAt: number;
+          id: any;
+          price: any;
+        }) => {
+          const isActive = !hasExpired(bid.expiration);
+          const expiryTime = calculateTimeDifference(bid.expiration);
+          const creationTime = calculateTimeDifference(bid.createdAt);
+          return {
+            id: bid.id,
+            price: bid.price,
+            isActive,
+            expiryTime,
+            creationTime,
+          };
+        }
+      )
+    );
+  },
+});
+
+const client = new ApolloClient({
+  link: restLink,
+  cache: new InMemoryCache(),
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <BidsTableContainer />
+    </ApolloProvider>
   );
 }
 
