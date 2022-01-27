@@ -23,7 +23,9 @@ export type Scalars = {
 
 export type Bid = {
   __typename?: "Bid";
+  createdAt: Scalars["Int"];
   creationTime: Scalars["String"];
+  expiration: Scalars["Int"];
   expiryTime: Scalars["String"];
   id: Scalars["ID"];
   isActive: Scalars["Boolean"];
@@ -36,7 +38,7 @@ export type Query = {
 };
 
 export type QueryBidsArgs = {
-  path: Scalars["String"];
+  path?: InputMaybe<Scalars["String"]>;
 };
 
 export type BidsQueryVariables = Exact<{
@@ -52,6 +54,8 @@ export type BidsQuery = {
     isActive: boolean;
     expiryTime: string;
     creationTime: string;
+    createdAt: number;
+    expiration: number;
   }>;
 };
 

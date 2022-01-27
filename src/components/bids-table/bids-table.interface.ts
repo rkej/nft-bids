@@ -1,4 +1,4 @@
-import { Bid } from "../../graphql-types";
+import { Bid } from "../../data-layer/graphql-types";
 
 export interface IBidsTableRenderer {
   activeBids: Bid[] | undefined;
@@ -7,7 +7,7 @@ export interface IBidsTableRenderer {
   loading: boolean;
 }
 
-export interface IBidsTable {
+export interface IBidsList {
   bids: Bid[] | undefined;
   icon: string;
 }
@@ -15,4 +15,9 @@ export interface IBidsTable {
 export interface IBidsTableBody {
   bid: Bid;
   icon: string;
+}
+
+export interface IEdgeCaseComponent {
+  loading: boolean;
+  error: boolean;
 }

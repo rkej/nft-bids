@@ -1,8 +1,8 @@
 overwrite: true
-schema: "module.graphql"
+schema: ".src/data-layer/module.graphql"
 documents: "./src/components/**/*.graphql"
 generates:
-  ./src/graphql-types.ts:
+  ./src/data-layer/graphql-types.ts:
     - typescript
     - typescript-operations
     - typescript-react-apollo

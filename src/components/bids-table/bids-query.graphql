@@ -1,9 +1,11 @@
-query bids {
-    bids {
+query bids($path: String!) {
+    bids(path: $path) {
         id
         price
         isActive
         expiryTime
         creationTime
+        createdAt
+        expiration
     }
 }

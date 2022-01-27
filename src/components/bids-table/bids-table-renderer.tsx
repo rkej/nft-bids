@@ -4,24 +4,43 @@ import {
   Card,
   Container,
   Dimmer,
-  Divider,
-  Icon,
   Label,
   Loader,
   List,
   Message,
   Segment,
-  Table,
+  Form,
 } from "semantic-ui-react";
 import {
-  IBidsTable,
-  IBidsTableBody,
+  IBidsList,
   IBidsTableRenderer,
+  IEdgeCaseComponent,
 } from "./bids-table.interface";
 import { FixedSizeList } from "react-window";
+import { Bid } from "../../data-layer/graphql-types";
 
 export const BidsTableRenderer: React.FC<IBidsTableRenderer> = React.memo(
   ({ activeBids, expiredBids, error, loading }) => {
+    const sortOptions = React.useMemo(
+      () => [
+        {
+          key: "price",
+          text: "Price",
+          balue: "price",
+        },
+        {
+          key: "creationTime",
+          text: "Created at",
+          value: "creationTime",
+        },
+        {
+          key: "expiryTime",
+          text: "Expiration time",
+          value: "expiryTime",
+        },
+      ],
+      []
+    );
     const panels = React.useMemo(
       () => [
         {
@@ -41,13 +60,7 @@ export const BidsTableRenderer: React.FC<IBidsTableRenderer> = React.memo(
             content: <Label content="Expired bids" color="red" />,
           },
           content: {
-            content: (
-              <BidsList
-                loading={loading}
-                bids={expiredBids}
-                icon="exclamation circle"
-              />
-            ),
+            content: <BidsList bids={expiredBids} icon="exclamation circle" />,
           },
         },
       ],
@@ -64,32 +77,46 @@ export const BidsTableRenderer: React.FC<IBidsTableRenderer> = React.memo(
         }}
       >
         <Card.Content header="NFT Bids" />
-        {!loading ? <Accordion defaultActiveIndex={0} panels={panels} /> : <LoaderComponent />}
-
+        {!loading || !error ? (
+          <Accordion defaultActiveIndex={0} panels={panels} />
+        ) : (
+          <EdgeCaseComponent loading={loading} error={error} />
+        )}
+        <Card.Content extra>
+          <Form>
+            <Form.Field inline>
+              <label>Sort by: </label>
+              <Form.Dropdown
+                selection
+                options={sortOptions}
+              />
+            </Form.Field>
+          </Form>
+        </Card.Content>
       </Card>
     );
   }
 );
 
-const BidsList: React.FC<IBidsTable> = ({ bids, icon, loading }) => {
-  console.log(loading);
+const BidsList: React.FC<IBidsList> = ({ bids, icon }) => {
   return (
     <Container style={{ width: "60rem" }}>
-      {!!bids?.length && !loading && (
+      {!!bids?.length && (
         <FixedSizeList
           height={960}
           width={960}
           itemSize={60}
           itemData={bids}
-          itemCount={bids?.length || 0}
+          itemCount={bids.length}
         >
           {BidsListRow}
         </FixedSizeList>
       )}
-      {!bids?.length && !loading && (
+      {!bids?.length && (
         <Message
           header="No bids at this time"
           content="Please check again later."
+          style={{ marginBottom: "10px" }}
         />
       )}
     </Container>
@@ -97,7 +124,7 @@ const BidsList: React.FC<IBidsTable> = ({ bids, icon, loading }) => {
 };
 
 const BidsListRow = React.memo(
-  ({ index, data, style }: { index: any; data: any; style: any }) => {
+  ({ index, data, style }: { index: number; data: Bid[]; style: any }) => {
     return (
       <List style={style} key={data[index].id}>
         <List.Item>
@@ -122,10 +149,23 @@ const BidsListRow = React.memo(
     );
   }
 );
-const LoaderComponent = React.memo(() => (
-  <Segment style={{height: "60rem"}}>
-    <Dimmer active inverted>
-      <Loader inverted content="loading" />
-    </Dimmer>
-  </Segment>
-));
+
+const EdgeCaseComponent: React.FC<IEdgeCaseComponent> = React.memo(
+  ({ loading, error }) => (
+    <Segment style={{ height: "60rem" }}>
+      {loading && (
+        <Dimmer active inverted>
+          <Loader inverted content="loading" />
+        </Dimmer>
+      )}
+      {error && (
+        <Message
+          header="We faced an issue while fetching your bids"
+          content="Please try again later."
+          color="red"
+          style={{ marginBottom: "10px" }}
+        />
+      )}
+    </Segment>
+  )
+);

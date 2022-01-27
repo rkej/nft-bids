@@ -1,4 +1,4 @@
-import { Bid } from "../../graphql-types";
+import { Bid } from "../../data-layer/graphql-types";
 
 export const processBids = (bids: Bid[] | undefined) => {
     const activeBids = bids?.filter((bid) => bid.isActive);

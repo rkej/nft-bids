@@ -4,8 +4,10 @@ type Bid {
   isActive: Boolean!
   expiryTime: String!
   creationTime: String!
+  createdAt: Int!
+  expiration: Int!
 }
 
 type Query {
-  bids: [Bid!]!
+  bids(path: String): [Bid!]!
 }

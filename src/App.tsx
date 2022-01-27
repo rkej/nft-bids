@@ -23,6 +23,8 @@ const restLink = new RestLink({
             isActive,
             expiryTime,
             creationTime,
+            createdAt: bid.createdAt,
+            expiration: bid.expiration,
           };
         }
       )
