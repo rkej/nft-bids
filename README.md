@@ -28,5 +28,6 @@ Feature-wise, I believe we're complete and here's a screenshot of the list <img 
 - Better design? This design is something that just came up in my head while looking at the requirements but we should work with a UI designer and work with users to see if the UX would fit their needs. We don't want to just be feature complete, we want to make sure the user is keen on engaging with the app. 
 - Code readability: I want to refactor the code in bids-list-renderer file and divide it into multiple files for each component that exists in the file to make it more readable.
 - Bugs? This is unreviewed code :)
+- Accessibility: From just trying keyboard navigation, it does look like we need to do some additional work there. 
 
 **Thank you and looking forward to the next steps! Email: rahulkejriwal18@gmail.com**
