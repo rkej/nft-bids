@@ -26,6 +26,7 @@ Feature-wise, I believe we're complete and here's a screenshot of the list <img 
 - Responsive UI: Due to the time constraint, my components have fixed height and width, this will be painful for users with smaller screens.
 - Library Choice: I am especially concerned about using `moment.js`. It might be a bit overkill to use the library instead of writing our own logic to calculate relative times but it works really well for a quick proof of concept. 
 - Better design? This design is something that just came up in my head while looking at the requirements but we should work with a UI designer and work with users to see if the UX would fit their needs. We don't want to just be feature complete, we want to make sure the user is keen on engaging with the app. 
+- Code readability: I want to refactor the code in bids-list-renderer file and divide it into multiple files for each component that exists in the file to make it more readable.
 - Bugs? This is unreviewed code :)
 
 **Thank you and looking forward to the next steps! Email: rahulkejriwal18@gmail.com**
