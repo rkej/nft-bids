@@ -16,7 +16,7 @@ We should be good to go!
 ## Features
 - To clearly distinguish between expired and active bids, we use 2 accordions - Active and Expired which render list of bids. 
 - Since there are no constraints given for the number of bids we'll be seeing, I have used `react-window` to avoid overloading the DOM and render only necessary list nodes. 
-- Using a dropdown above the accordion, we're able to sort the list. I am only showing and sorting price details, creation time and expiry time as I don't believe other values in the response had much meaning to the user. 
+- Using a dropdown above the accordion, we're able to sort the list. I am only showing and sorting price details, creation time and expiry time as I didn't believe other values in the response had much meaning to the user. 
 
 Feature-wise, I believe we're complete and here's a screenshot of the list <img width="913" alt="Screen Shot 2022-01-27 at 6 38 50 AM" src="https://user-images.githubusercontent.com/40424270/151381181-5b7ace19-cb35-42a7-93e6-21d098b83c67.png">
 
