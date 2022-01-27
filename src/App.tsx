@@ -1,7 +1,7 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { RestLink } from "apollo-link-rest";
 import { calculateTimeDifference, hasExpired } from "./helpers";
-import { BidsTableContainer } from "./components/bids-table/bids-table-container";
+import { BidsTableContainer } from "./components/bids-list/bids-list-container";
 
 const restLink = new RestLink({
   uri: "https://nft-fe-hiring.vercel.app/api/",

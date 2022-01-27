@@ -67,6 +67,8 @@ export const BidsDocument = gql`
       isActive
       expiryTime
       creationTime
+      createdAt
+      expiration
     }
   }
 `;

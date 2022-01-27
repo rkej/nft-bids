@@ -1,7 +1,7 @@
 import React from "react";
 import { Bid, useBidsQuery } from "../../data-layer/graphql-types";
-import { processBids } from "./bids-table-helper";
-import { BidsTableRenderer } from "./bids-table-renderer";
+import { processBids } from "./bids-list-helper";
+import { BidsListRenderer } from "./bids-list-renderer";
 
 export const BidsTableContainer = 
   React.memo(() => {
@@ -19,7 +19,7 @@ export const BidsTableContainer =
     }, [data, loading, error]);
 
     return (
-      <BidsTableRenderer
+      <BidsListRenderer
         activeBids={activeBids}
         expiredBids={expiredBids}
         loading={loading}

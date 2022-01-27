@@ -1,6 +1,6 @@
 import { Bid } from "../../data-layer/graphql-types";
 
-export interface IBidsTableRenderer {
+export interface IBidsListRenderer {
   activeBids: Bid[] | undefined;
   expiredBids: Bid[] | undefined;
   error: boolean;
@@ -9,15 +9,16 @@ export interface IBidsTableRenderer {
 
 export interface IBidsList {
   bids: Bid[] | undefined;
-  icon: string;
-}
-
-export interface IBidsTableBody {
-  bid: Bid;
-  icon: string;
+  loading: boolean;
 }
 
 export interface IEdgeCaseComponent {
   loading: boolean;
   error: boolean;
+}
+
+export enum SortKey {
+  Price = "price",
+  Creation = "creationTime",
+  Expiration = "expiryTime",
 }
