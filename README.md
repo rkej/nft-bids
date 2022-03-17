@@ -1,5 +1,5 @@
 # NFT Bids
-Hi there! Here's my submission for the coding challenge.
+Just playing around with GraphQL + React + Windowing
 ## Setup
 Make sure you have the pre-requisites set up - `Node`, `npm` and `yarn` installed. 
 1. Clone this repo
